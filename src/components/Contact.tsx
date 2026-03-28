@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Contact() {
+  const { t } = useLanguage();
   return (
     <section id="contact" className="py-24 bg-charcoal-900 border-t border-white/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,7 +17,7 @@ export default function Contact() {
             viewport={{ once: true }}
             className="text-copper-500 font-bold tracking-wider uppercase text-sm mb-3"
           >
-            Kontakt
+            {t.contact.tag}
           </motion.h2>
           <motion.h3 
             initial={{ opacity: 0, y: 20 }}
@@ -24,7 +26,7 @@ export default function Contact() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-5xl font-extrabold text-white mb-6"
           >
-            Lassen Sie uns zusammenarbeiten
+            {t.contact.title}
           </motion.h3>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -33,7 +35,7 @@ export default function Contact() {
             transition={{ delay: 0.2 }}
             className="text-steel-400 max-w-2xl mx-auto"
           >
-            Haben Sie ein Projekt im Auge oder benötigen einen schnellen Notdienst? Kontaktieren Sie uns für ein kostenloses Angebot.
+            {t.contact.description}
           </motion.p>
         </div>
 
@@ -51,13 +53,13 @@ export default function Contact() {
               
               <div className="bg-black/40 border border-steel-600/30 p-6 rounded-sm">
                 <MapPin className="text-copper-500 w-8 h-8 mb-4 border border-copper-500/20 p-1.5 rounded-sm bg-copper-600/10" />
-                <h4 className="text-white font-bold mb-2">Standort</h4>
+                <h4 className="text-white font-bold mb-2">{t.contact.details.location}</h4>
                 <p className="text-steel-400">Werner Hastreiter GmbH<br />Lerchenstraße 20<br />80995 München, Germany</p>
               </div>
 
               <div className="bg-black/40 border border-steel-600/30 p-6 rounded-sm">
                 <Phone className="text-copper-500 w-8 h-8 mb-4 border border-copper-500/20 p-1.5 rounded-sm bg-copper-600/10" />
-                <h4 className="text-white font-bold mb-2">Telefon / Notdienst</h4>
+                <h4 className="text-white font-bold mb-2">{t.contact.details.phone}</h4>
                 <a href="tel:+4989528753" className="text-steel-400 hover:text-white transition-colors block text-lg font-bold">
                   +49 89 528753
                 </a>
@@ -65,7 +67,7 @@ export default function Contact() {
 
               <div className="bg-black/40 border border-steel-600/30 p-6 rounded-sm">
                 <Mail className="text-copper-500 w-8 h-8 mb-4 border border-copper-500/20 p-1.5 rounded-sm bg-copper-600/10" />
-                <h4 className="text-white font-bold mb-2">E-Mail</h4>
+                <h4 className="text-white font-bold mb-2">{t.contact.details.email}</h4>
                 <a href="mailto:info@werner-hastreiter.de" className="text-steel-400 hover:text-white transition-colors">
                   info@werner-hastreiter.de
                 </a>
@@ -73,8 +75,8 @@ export default function Contact() {
 
               <div className="bg-black/40 border border-steel-600/30 p-6 rounded-sm">
                 <Clock className="text-copper-500 w-8 h-8 mb-4 border border-copper-500/20 p-1.5 rounded-sm bg-copper-600/10" />
-                <h4 className="text-white font-bold mb-2">Öffnungszeiten</h4>
-                <p className="text-steel-400">Mo – Do: 08:30 – 17:00<br />Fr: 08:30 – 14:00</p>
+                <h4 className="text-white font-bold mb-2">{t.contact.details.hours}</h4>
+                <p className="text-steel-400" dangerouslySetInnerHTML={{ __html: t.contact.hoursText }} />
               </div>
 
             </div>
@@ -101,46 +103,46 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="bg-charcoal-800 p-8 rounded-sm border border-steel-600/20 shadow-2xl"
           >
-            <h4 className="text-2xl font-bold text-white mb-6">Kostenloses Angebot anfordern</h4>
+            <h4 className="text-2xl font-bold text-white mb-6">{t.contact.form.title}</h4>
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-steel-400 mb-2">Name / Firma</label>
+                  <label htmlFor="name" className="block text-sm font-medium text-steel-400 mb-2">{t.contact.form.nameLabel}</label>
                   <input 
                     type="text" 
                     id="name" 
                     className="w-full bg-black/50 border border-steel-600/40 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-copper-500 focus:ring-1 focus:ring-copper-500 transition-colors"
-                    placeholder="Max Mustermann"
+                    placeholder={t.contact.form.namePlaceholder}
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-steel-400 mb-2">Telefon</label>
+                  <label htmlFor="phone" className="block text-sm font-medium text-steel-400 mb-2">{t.contact.form.phoneLabel}</label>
                   <input 
                     type="tel" 
                     id="phone" 
                     className="w-full bg-black/50 border border-steel-600/40 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-copper-500 focus:ring-1 focus:ring-copper-500 transition-colors"
-                    placeholder="+49 ..."
+                    placeholder={t.contact.form.phonePlaceholder}
                   />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-steel-400 mb-2">E-Mail Adresse</label>
+                <label htmlFor="email" className="block text-sm font-medium text-steel-400 mb-2">{t.contact.form.emailLabel}</label>
                 <input 
                   type="email" 
                   id="email" 
                   className="w-full bg-black/50 border border-steel-600/40 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-copper-500 focus:ring-1 focus:ring-copper-500 transition-colors"
-                  placeholder="mail@beispiel.de"
+                  placeholder={t.contact.form.emailPlaceholder}
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-steel-400 mb-2">Ihre Nachricht oder Anfrage</label>
+                <label htmlFor="message" className="block text-sm font-medium text-steel-400 mb-2">{t.contact.form.messageLabel}</label>
                 <textarea 
                   id="message" 
                   rows={4}
                   className="w-full bg-black/50 border border-steel-600/40 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-copper-500 focus:ring-1 focus:ring-copper-500 transition-colors resize-none"
-                  placeholder="Wie können wir Ihnen helfen?"
+                  placeholder={t.contact.form.messagePlaceholder}
                 />
               </div>
 
@@ -148,7 +150,7 @@ export default function Contact() {
                 type="submit"
                 className="w-full bg-copper-600 hover:bg-copper-500 text-white font-bold py-4 rounded-sm transition-all shadow-[0_0_15px_rgba(180,83,9,0.3)]"
               >
-                Nachricht senden
+                {t.contact.form.submit}
               </button>
             </form>
           </motion.div>

@@ -2,46 +2,55 @@
 
 import { motion } from "framer-motion";
 import { Maximize2 } from "lucide-react";
-
-const projects = [
-  {
-    id: 1,
-    title: "Sicherheitstüren",
-    category: "Einbruchschutz",
-    image: "https://images.unsplash.com/photo-1541812613137-b95c02ef1bb5?q=80&w=1000&auto=format&fit=crop",
-    size: "large"
-  },
-  {
-    id: 2,
-    title: "Maßgefertigtes Tor",
-    category: "Metallbau",
-    image: "https://images.unsplash.com/photo-1628174786765-ab1b95147854?q=80&w=1000&auto=format&fit=crop",
-    size: "small"
-  },
-  {
-    id: 3,
-    title: "Treppengeländer",
-    category: "Konstruktion",
-    image: "https://images.unsplash.com/photo-1600021946864-152e04374cbf?q=80&w=1000&auto=format&fit=crop",
-    size: "small"
-  },
-  {
-    id: 4,
-    title: "Schließanlagen",
-    category: "Sicherheitstechnik",
-    image: "https://images.unsplash.com/photo-1558005530-cb61e21b0fb6?q=80&w=1000&auto=format&fit=crop",
-    size: "small"
-  },
-  {
-    id: 5,
-    title: "Stahltreppe",
-    category: "Metallbau",
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1000&auto=format&fit=crop",
-    size: "large"
-  }
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ProjectsGallery() {
+  const { t } = useLanguage();
+  const projects = [
+    {
+      id: 1,
+      title: t.projects.items[0],
+      category: t.projects.categories.security,
+      image: "/images/security-doors.png",
+      size: "large"
+    },
+    {
+      id: 2,
+      title: t.projects.items[1],
+      category: t.projects.categories.metal,
+      image: "/images/custom-metalwork.png",
+      size: "small"
+    },
+    {
+      id: 3,
+      title: t.projects.items[2],
+      category: t.projects.categories.construction,
+      image: "/images/stair-railings.png",
+      size: "small"
+    },
+    {
+      id: 4,
+      title: t.projects.items[3],
+      category: t.projects.categories.systems,
+      image: "/images/high-security-locks.png",
+      size: "small"
+    },
+    {
+      id: 5,
+      title: t.projects.items[4],
+      category: t.projects.categories.metal,
+      image: "/images/custom-gate.png",
+      size: "large"
+    },
+    {
+      id: 6,
+      title: t.projects.items[5],
+      category: t.projects.categories.security,
+      image: "/images/window-grilles.png",
+      size: "small"
+    }
+  ];
+
   return (
     <section id="projects" className="py-24 bg-charcoal-900 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,7 +62,7 @@ export default function ProjectsGallery() {
             viewport={{ once: true }}
             className="text-copper-500 font-bold tracking-wider uppercase text-sm mb-3"
           >
-            Referenzen
+            {t.projects.tag}
           </motion.h2>
           <motion.h3 
             initial={{ opacity: 0, y: 20 }}
@@ -62,7 +71,7 @@ export default function ProjectsGallery() {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-5xl font-extrabold text-white mb-6"
           >
-            Unsere Arbeiten
+            {t.projects.title}
           </motion.h3>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -71,12 +80,12 @@ export default function ProjectsGallery() {
             transition={{ delay: 0.2 }}
             className="text-steel-400 max-w-2xl mx-auto"
           >
-            Vom massiven Stahltor bis zur feinen Schließanlage: Werfen Sie einen Blick auf einige unserer erfolgreich realisierten Projekte für Kunden im Raum München.
+            {t.projects.description}
           </motion.p>
         </div>
 
         {/* Grid Gallery */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[300px] md:auto-rows-[280px] lg:auto-rows-[320px] grid-flow-row-dense">
           {projects.map((project, idx) => (
             <motion.div
               key={project.id}
@@ -84,8 +93,8 @@ export default function ProjectsGallery() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className={`relative group overflow-hidden rounded-sm bg-steel-600 ${
-                project.size === "large" ? "md:col-span-2 md:row-span-2 aspect-[16/9]" : "aspect-square"
+              className={`relative group overflow-hidden rounded-sm bg-steel-600 h-full w-full ${
+                project.size === "large" ? "md:col-span-2 md:row-span-2" : "col-span-1 row-span-1"
               }`}
             >
               <img 

@@ -2,22 +2,24 @@
 
 import { motion } from "framer-motion";
 import { PhoneCall, ArrowRight, ShieldCheck, Wrench, Lock } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Services() {
+  const { t } = useLanguage();
   const servicesList = [
     {
-      title: "Schlüsseldienst & Notöffnung",
-      description: "Schnelle und zuverlässige Türöffnung in München und Umgebung. Beschädigungsfrei, wenn möglich.",
+      title: t.services.items[0].title,
+      description: t.services.items[0].description,
       icon: <Lock className="w-8 h-8 text-copper-500" />,
     },
     {
-      title: "Einbruchschutz & Sicherheitstechnik",
-      description: "Sichern Sie Ihr Eigenheim oder Gewerbe. Wir montieren Panzerriegel, Zusatzschlösser und Fenstergitter.",
+      title: t.services.items[1].title,
+      description: t.services.items[1].description,
       icon: <ShieldCheck className="w-8 h-8 text-copper-500" />,
     },
     {
-      title: "Metallbau & Konstruktionen",
-      description: "Geländer, Zaunanlagen, Gitter und Tore nach Maß für Privat- und Gewerbekunden.",
+      title: t.services.items[2].title,
+      description: t.services.items[2].description,
       icon: <Wrench className="w-8 h-8 text-copper-500" />,
     },
   ];
@@ -38,17 +40,17 @@ export default function Services() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-copper-500 font-bold tracking-wider uppercase text-sm mb-3">
-                Unsere Leistungen
+                {t.services.tag}
               </h2>
               <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-6 leading-tight">
-                Premium Metallbau & Schlosserei
+                {t.services.title}
               </h3>
               <p className="text-steel-400 mb-8 leading-relaxed">
-                Als gewerbliche Bauschlosserei sind wir spezialisiert auf Metallschlösser und Beschläge sowie deren Reparatur. Wir bieten erstklassige Verarbeitung und schnellen Vor-Ort-Service.
+                {t.services.description}
               </p>
               <div className="flex gap-4">
                 <a href="#contact" className="inline-flex items-center gap-2 bg-copper-600 hover:bg-copper-500 text-white px-6 py-3 rounded-sm font-semibold transition-all">
-                  Jetzt anfragen <ArrowRight className="w-4 h-4" />
+                  {t.services.cta} <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
             </motion.div>
@@ -83,8 +85,8 @@ export default function Services() {
                  className="sm:col-span-2 bg-copper-600/10 border border-copper-500/30 p-8 rounded-sm flex flex-col sm:flex-row items-center justify-between gap-6"
               >
                 <div>
-                  <h4 className="text-lg font-bold text-white mb-2">Notfall oder dringende Reparatur?</h4>
-                  <p className="text-copper-400 text-sm">Unser Team ist in München schnell vor Ort.</p>
+                  <h4 className="text-lg font-bold text-white mb-2">{t.services.emergency.title}</h4>
+                  <p className="text-copper-400 text-sm">{t.services.emergency.subtitle}</p>
                 </div>
                 <a href="tel:+4989528753" className="flex items-center gap-2 flex-shrink-0 bg-copper-600 hover:bg-copper-500 text-white px-6 py-3 rounded-sm font-bold transition-all shadow-[0_0_20px_rgba(180,83,9,0.3)]">
                   <PhoneCall className="w-5 h-5" />

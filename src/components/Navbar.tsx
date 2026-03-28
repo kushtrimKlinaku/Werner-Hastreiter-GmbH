@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Globe } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { langDe, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,11 +19,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Start", href: "#" },
-    { name: "Leistungen", href: "#services" },
-    { name: "Projekte", href: "#projects" },
-    { name: "Über uns", href: "#about" },
-    { name: "Kontakt", href: "#contact" },
+    { name: t.navbar.start, href: "#" },
+    { name: t.navbar.services, href: "#services" },
+    { name: t.navbar.projects, href: "#projects" },
+    { name: t.navbar.about, href: "#about" },
+    { name: t.navbar.contact, href: "#contact" },
   ];
 
   return (
@@ -55,16 +57,20 @@ export default function Navbar() {
             ))}
             
             <div className="flex items-center gap-4 ml-4 pl-4 border-l border-steel-600/50">
-              <button className="flex items-center text-steel-400 hover:text-white transition-colors" aria-label="Toggle language">
+              <button 
+                onClick={() => setLanguage(langDe ? "en" : "de")}
+                className="flex items-center text-steel-400 hover:text-white transition-colors" 
+                aria-label="Toggle language"
+              >
                 <Globe className="w-4 h-4 mr-1" />
-                <span className="text-xs font-bold">DE / EN</span>
+                <span className="text-xs font-bold">{t.navbar.language}</span>
               </button>
               
               <a
                 href="#contact"
                 className="bg-copper-600 hover:bg-copper-500 text-white px-5 py-2.5 rounded-sm font-semibold text-sm transition-all shadow-[0_0_15px_rgba(180,83,9,0.4)]"
               >
-                Angebot anfordern
+                {t.navbar.requestQuote}
               </a>
             </div>
           </div>
@@ -101,11 +107,14 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-center bg-copper-600 text-white px-4 py-3 rounded-sm font-bold text-sm w-full"
               >
-                Angebot anfordern
+                {t.navbar.requestQuote}
               </a>
-              <button className="flex items-center justify-center text-steel-400 py-2 border border-steel-600/50 rounded-sm">
+              <button 
+                onClick={() => setLanguage(langDe ? "en" : "de")}
+                className="flex items-center justify-center text-steel-400 py-2 border border-steel-600/50 rounded-sm"
+              >
                 <Globe className="w-4 h-4 mr-2" />
-                Language: EN
+                {t.navbar.language}
               </button>
             </div>
           </div>

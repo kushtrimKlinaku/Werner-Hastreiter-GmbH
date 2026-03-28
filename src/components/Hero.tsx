@@ -2,15 +2,17 @@
 
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Hero() {
+  const { t } = useLanguage();
   return (
     <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Background Image / Overlay */}
       <div 
         className="absolute inset-0 z-0 bg-charcoal-900"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop')",
+          backgroundImage: "url('/images/hero-bg.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -32,7 +34,7 @@ export default function Hero() {
               <Star key={i} className="w-4 h-4 fill-current" />
             ))}
           </div>
-          <span className="text-white font-semibold text-sm">4.823 Google Rezensionen</span>
+          <span className="text-white font-semibold text-sm">{t.hero.reviews}</span>
         </motion.div>
 
         {/* Main Title */}
@@ -41,9 +43,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6 max-w-4xl"
-        >
-          Ihre erfahrene <span className="text-copper-500">Schlosserei & Metallbau</span> in München
-        </motion.h1>
+          dangerouslySetInnerHTML={{ __html: t.hero.title }}
+        />
 
         {/* Sub-headline */}
         <motion.p 
@@ -52,7 +53,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg md:text-xl text-steel-300 mb-10 max-w-2xl font-light"
         >
-          Traditionelles Handwerk, modernste Sicherheitstechnik und zuverlässiger Schlüsselnotdienst. Wir öffnen Ihnen Tür und Tor.
+          {t.hero.subtitle}
         </motion.p>
 
         {/* CTAs */}
@@ -66,13 +67,13 @@ export default function Hero() {
             href="tel:+4989528753" 
             className="bg-copper-600 hover:bg-copper-500 text-white px-8 py-4 rounded-sm font-bold text-lg transition-all shadow-[0_0_20px_rgba(180,83,9,0.4)] flex items-center justify-center gap-2"
           >
-            Tür aufmachen lassen
+            {t.hero.ctaPrimary}
           </a>
           <a 
             href="#contact" 
             className="bg-transparent border-2 border-steel-400 hover:border-white hover:text-white hover:bg-white/5 text-steel-300 px-8 py-4 rounded-sm font-bold text-lg transition-all flex items-center justify-center"
           >
-            Anderes Angebot anfordern
+            {t.hero.ctaSecondary}
           </a>
         </motion.div>
 
@@ -85,7 +86,7 @@ export default function Hero() {
         transition={{ duration: 1, delay: 1.5 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce text-steel-500"
       >
-        <span className="text-xs tracking-widest uppercase mb-2">Scrollen</span>
+        <span className="text-xs tracking-widest uppercase mb-2">{t.hero.scroll}</span>
         <div className="w-[1px] h-8 bg-current"></div>
       </motion.div>
     </section>
